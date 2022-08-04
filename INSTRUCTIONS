@@ -1,0 +1,66 @@
+
+The core integration program is nbody-satellites.
+Programs that analyze results begin with analyze.
+
+To compile them all use "make" or "make all"
+To remove the executables "make clean".
+
+To run an integration type
+./nbody-satellites run-file >> run-file.out&
+
+A run-file contains four lines:
+ic-file-name
+stepsize
+steps-between-outputs
+number-of-outputs
+
+The ic-file-name contains the initial conditions:
+2 ;ic file version number
+G ; gravitational constant (determines units)
+n ; index of the body that has satellites
+px py pz ; rectangular components of the pole unit vector
+I/MR^2 omega0 ; normalized moment of inertia and rotation rate
+J2 J3 J4 J5 J6 Re ; gravitational harmonics and fiducial radius (for the Js as well as normalized moment)
+satellite-mass-0 ; entered as a negative numner to indicate a satellite
+planet-centered-satellite-0-rectangular-coordinates
+planet-centered-satellite-0-rectangular-velocity
+tidal-parameters-0
+satellite-mass-1: as a negative number
+... (as many satellites as are present)
+mass-sun
+sun-coordinates 
+sun-velcity
+mass-jupiter
+jupiter-coordinates
+jupiter-velocity
+mass-saturn
+saturn-coordinates
+saturn-velocity
+mass-uranus
+uranus-coordinates
+uranus-velocity
+mass-neptune
+neptune-coordinates
+neptune-velocity
+
+Except for the planet that has the satellites, the mass and
+coordinates are the rectangular coordinates of the barycenter of the
+planet and its satellites with respect to the solar system barycenter.
+For the planet with the satellites, these are the rectangular
+coordinates of the planet with respect to the barycenter of the solar
+system.
+
+Of course, the planets could be replaced by any planetary system.
+
+Executing
+./nbody-satellites run-file >> run-file.out&
+produces a "mapping binary" output file run-file.mb.
+
+If the integration is interrupted, running the same command continues
+the integration.  If you want to start over you must remove the file
+run-file.mb.
+
+
+
+
+
